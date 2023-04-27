@@ -34,6 +34,8 @@ export function PageLogin() {
 
     email.value = "usertest@gmail.com"
     password.value = "123456"
+
+    auth.logout()
   }, [])
 
 
