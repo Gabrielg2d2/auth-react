@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import './Login.css'
+
 import { TemplateHome } from './template'
 
 export function PageHome() {

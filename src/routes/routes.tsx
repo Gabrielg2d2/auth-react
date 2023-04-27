@@ -4,6 +4,18 @@ import { PageLogin } from '../pages/Login';
 import { PrivateRoutes } from './PrivateRoutes';
 import { PageDashboard } from '../pages/Dashboard';
 
+function Sidebar() {
+
+  return (
+    <div className="container">
+      <nav className="sidebar">
+        <h1>Sidebar</h1>
+      </nav>
+      <PrivateRoutes />
+    </div>
+  )
+}
+
 export function AppRoutes() {
   return (
     <BrowserRouter>
@@ -11,7 +23,7 @@ export function AppRoutes() {
         <Route path="/" element={<PageHome />} />
         <Route path="/login" element={<PageLogin />} />
 
-        <Route path="/" element={<PrivateRoutes />} >
+        <Route path="/" element={<Sidebar />} >
           <Route path="dashboard" element={<PageDashboard />} />
         </Route>
 
