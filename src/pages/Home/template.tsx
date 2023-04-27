@@ -2,7 +2,11 @@ import reactLogo from '../../assets/react.svg'
 import viteLogo from '/vite.svg'
 import './Login.css'
 
-export function TemplateHome() {
+type TemplateHomeType = {
+  handleNavigationLogin: () => void
+}
+
+export function TemplateHome(props: TemplateHomeType) {
   return (
     <>
       <div>
@@ -16,9 +20,9 @@ export function TemplateHome() {
       <h1>Vite + React + Auth</h1>
       <main className="main">
         <h1>Home</h1>
-        <span>
-          <a href="/login">Login</a>
-        </span>
+        <button className="link" onClick={props.handleNavigationLogin}>
+          Login to access the dashboard
+        </button>
       </main>
     </>
   )

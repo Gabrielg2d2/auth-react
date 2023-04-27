@@ -71,3 +71,9 @@
 
 .submit{}
 
+.link{
+  text-decoration: none;
+  color: #353;
+  font-size: 0.8rem;
+}
+

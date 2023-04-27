@@ -1,7 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import Auth from './routes/Auth';
+import Auth from './Auth';
 
-export function PrivateRoute() {
+export function PrivateRoutes() {
   return Auth.isAuthenticated() ? <Outlet /> : <Navigate to="/login" />;
 }
-
