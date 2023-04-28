@@ -1,4 +1,3 @@
-import { PersistAuth } from "../PersistAuth";
 import { IAuth, INewAuth, IUser } from "./interface";
 
 class Auth implements IAuth {
@@ -14,13 +13,6 @@ class Auth implements IAuth {
         email: '',
         profile: []
       }
-
-      this.initializeAuth();
-    }
-
-    initializeAuth() {
-      const auth = new PersistAuth().getPersist();
-      if(auth) this.setAuth(auth);
     }
   
     logout() {
@@ -53,18 +45,12 @@ class Auth implements IAuth {
       }
       return true;
     }
-
-    persistAuth(auth: INewAuth) {
-      if(!this.verifyAuth(auth)) return;
-      sessionStorage.setItem('auth-123', JSON.stringify(auth));
-    }
   
     setAuth(auth: INewAuth) {
       if(!this.verifyAuth(auth)) return;   
       this.user = auth.user;
       this.token = auth.token;
       this.authenticated = auth.authenticated;
-      this.persistAuth(auth);
     }
 
     isAuthenticated() {

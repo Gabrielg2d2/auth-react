@@ -1,7 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { paths } from './paths';
-import auth from '../entities/Auth/auth';
+import { PersistAuth } from '../entities/PersistAuth';
 
 export function PrivateRoutes() {
-  return auth.isAuthenticated() ? <Outlet /> : <Navigate to={paths.home} />;
+  const isAuth = new PersistAuth().getPersist();
+  return isAuth ? <Outlet /> : <Navigate to={paths.home} />;
 }

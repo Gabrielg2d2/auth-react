@@ -1,4 +1,3 @@
-
 import { TemplateDashboard } from './template'
 
 export function PageDashboard() {

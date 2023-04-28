@@ -11,9 +11,7 @@ export interface INewAuth {
 }
   
 export interface IAuth {
-    initializeAuth(): void;
     logout(): void;
-    persistAuth(auth: INewAuth): void;
     setAuth(auth: INewAuth): void;
   
     getToken(): string;

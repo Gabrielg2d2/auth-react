@@ -1,9 +1,8 @@
 
 import { FormEvent, useEffect } from 'react'
 import { TemplateLogin } from './template'
-import { sigInFake } from '../../service/sigInFake';
 import { useNavigationCustom } from '../../routes/useNavigationCustom';
-import auth from '../../entities/Auth/auth';
+import { Login } from '../../domain/Login';
 
 type LoginType = {
   email: string
@@ -11,20 +10,15 @@ type LoginType = {
 }
 
 export function PageLogin() {
+  const login = new Login();
   const { handleDashboard } = useNavigationCustom();
-
-  async function postSigIn(data: LoginType){
-    if(!data) return alert('Email or password invalid')
-    const response = await sigInFake()
-    auth.setAuth(response.data)
-    handleDashboard()
-  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement)
     const data = Object.fromEntries(formData.entries())
-    await postSigIn(data as LoginType)
+    const response = await login.login(data as LoginType)
+    if (response) handleDashboard()
   }
 
   useEffect(() => {
@@ -34,7 +28,6 @@ export function PageLogin() {
     email.value = "usertest@gmail.com"
     password.value = "123456"
 
-    auth.logout()
   }, [])
 
 
