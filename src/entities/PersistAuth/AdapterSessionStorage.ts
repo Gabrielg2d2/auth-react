@@ -1,6 +1,7 @@
 import { INewAuth } from "../Auth/interface";
+import { IAdapterAuth } from "./interface";
 
-export class AdapterSessionStorage {
+export class AdapterSessionStorage implements IAdapterAuth {
 
     private keyStorage: string;
 
@@ -8,15 +9,15 @@ export class AdapterSessionStorage {
         this.keyStorage = 'auth-123';
     }
 
-    getSessionStorage() {
+    getSessionAuth() {
         return JSON.parse(sessionStorage.getItem(this.keyStorage) || 'null');
     }
 
-    setSessionStorage(auth: INewAuth) {
+    setSessionAuth(auth: INewAuth) {
         sessionStorage.setItem(this.keyStorage, JSON.stringify(auth));
     }
 
-    clearSessionStorage() {
+    clearSessionAuth() {
         sessionStorage.removeItem(this.keyStorage);
     }
 }

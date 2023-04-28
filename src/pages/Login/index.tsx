@@ -30,6 +30,5 @@ export function PageLogin() {
 
   }, [])
 
-
   return (<TemplateLogin handleSubmit={handleSubmit}/>)
 }
