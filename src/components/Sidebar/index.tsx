@@ -1,20 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { SidebarTemplate } from "./template";
+import { useNavigationCustom } from "../../routes/useNavigationCustom";
 
 export function Sidebar() {
-    const navigation = useNavigate();
-
-    function handleLogout() {
-      navigation('/login');
-    }
-
-    function handleDashboard() {
-      navigation('/dashboard');
-    }
-
-    function handleAbout() {
-      navigation('/about');
-    }
+    const { handleLogout, handleAbout, handleDashboard } = useNavigationCustom();
     
     return (
       <SidebarTemplate
