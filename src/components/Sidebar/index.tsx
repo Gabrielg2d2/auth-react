@@ -1,28 +1,27 @@
 import { useNavigate } from "react-router-dom";
-import { PrivateRoutes } from "../../routes/PrivateRoutes";
+import { SidebarTemplate } from "./template";
 
 export function Sidebar() {
     const navigation = useNavigate();
+
+    function handleLogout() {
+      navigation('/login');
+    }
+
+    function handleDashboard() {
+      navigation('/dashboard');
+    }
+
+    function handleAbout() {
+      navigation('/about');
+    }
     
     return (
-      <div className="container">
-        <nav className="sidebar">
-          <h1 className="title-sidebar">Sidebar</h1>
-  
-          <ul className="list-sidebar">
-            <li>
-             <button onClick={() => navigation('/dashboard')}>Dashboard</button>
-            </li>
-            <li>
-             <button onClick={() => navigation('/about')}>About</button>
-            </li>
-            <li>
-             <button onClick={() => navigation('/login')}>SignOut</button>
-            </li>
-          </ul>
-        </nav>
-        <PrivateRoutes />
-      </div>
+      <SidebarTemplate
+        handleLogout={handleLogout}
+        handleDashboard={handleDashboard}
+        handleAbout={handleAbout}
+      />
     )
   }
   
