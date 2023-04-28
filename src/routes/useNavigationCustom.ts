@@ -4,6 +4,10 @@ import { paths } from "./paths";
 export function useNavigationCustom() {
     const navigation = useNavigate();
 
+    function handleHome() {
+      navigation(paths.home);
+    }
+
     function handleLogout() {
       navigation(paths.login);
     }
@@ -16,5 +20,5 @@ export function useNavigationCustom() {
       navigation(paths.about);
     }
 
-    return { handleLogout, handleDashboard, handleAbout };
+    return { handleLogout, handleDashboard, handleAbout, handleHome };
 }

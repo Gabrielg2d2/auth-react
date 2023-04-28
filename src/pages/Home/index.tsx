@@ -1,14 +1,13 @@
-import { useNavigate } from 'react-router-dom'
-
 import { TemplateHome } from './template'
 import { useEffect } from 'react';
 import auth from '../../routes/Auth';
+import { useNavigationCustom } from '../../routes/useNavigationCustom';
 
 export function PageHome() {
-  const navigate = useNavigate();
+  const { handleLogout } = useNavigationCustom();
 
   function handleNavigationLogin() {
-    navigate('/login')
+    handleLogout()
   }
 
   useEffect(() => {

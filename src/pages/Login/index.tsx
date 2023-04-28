@@ -3,7 +3,7 @@ import { FormEvent, useEffect } from 'react'
 import { TemplateLogin } from './template'
 import auth from '../../routes/Auth';
 import { sigInFake } from '../../service/sigInFake';
-import { useNavigate } from 'react-router-dom';
+import { useNavigationCustom } from '../../routes/useNavigationCustom';
 
 type LoginType = {
   email: string
@@ -11,14 +11,13 @@ type LoginType = {
 }
 
 export function PageLogin() {
-
-  const navigation  = useNavigate()
+  const { handleDashboard } = useNavigationCustom();
 
   async function postSigIn(data: LoginType){
     if(!data) return alert('Email or password invalid')
     const response = await sigInFake()
     auth.setAuth(response.data)
-    navigation('/dashboard')
+    handleDashboard()
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
