@@ -23,7 +23,13 @@ class Auth {
         name: '',
         email: '',
         profile: []
-    }
+      }
+
+      if(sessionStorage.getItem('auth-123')) {
+        const auth = JSON.parse(sessionStorage.getItem('auth-123') || '{}');
+        this.setAuth(auth);
+      }
+     
     }
   
     logout() {
@@ -40,6 +46,10 @@ class Auth {
       return this.authenticated;
     }
 
+    persistAuth(auth: IAuth) {
+      sessionStorage.setItem('auth-123', JSON.stringify(auth));
+    }
+
     setAuth(auth: IAuth) {
       if(!auth.token) return this.logout();
       if(!auth.user.name) return this.logout();
@@ -49,6 +59,8 @@ class Auth {
       this.user = auth.user;
       this.token = auth.token;
       this.authenticated = auth.authenticated;
+
+      this.persistAuth(auth);
     }
 
     getToken() {
