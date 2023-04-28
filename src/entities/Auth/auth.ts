@@ -1,3 +1,4 @@
+import { PersistAuth } from "../PersistAuth";
 import { IAuth, INewAuth, IUser } from "./interface";
 
 class Auth implements IAuth {
@@ -18,7 +19,7 @@ class Auth implements IAuth {
     }
 
     initializeAuth() {
-      const auth = JSON.parse(sessionStorage.getItem('auth-123') || 'null');
+      const auth = new PersistAuth().getPersist();
       if(auth) this.setAuth(auth);
     }
   
