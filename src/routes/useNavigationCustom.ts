@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import { paths } from "./paths";
 
 export function useNavigationCustom() {
     const navigation = useNavigate();
 
     function handleLogout() {
-      navigation('/login');
+      navigation(paths.login);
     }
 
     function handleDashboard() {
-      navigation('/dashboard');
+      navigation(paths.dashboard);
     }
 
     function handleAbout() {
-      navigation('/about');
+      navigation(paths.about);
     }
 
     return { handleLogout, handleDashboard, handleAbout };

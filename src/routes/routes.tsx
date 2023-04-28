@@ -4,18 +4,20 @@ import { PageLogin } from '../pages/Login';
 import { PageDashboard } from '../pages/Dashboard';
 import { PageAbout } from '../pages/About';
 import { Sidebar } from '../components/Sidebar';
-
+import { domainPrivate, domainPublic, paths } from './paths';
 
 export function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<PageHome />} />
-        <Route path="/login" element={<PageLogin />} />
+        <Route path={domainPublic}>
+          <Route index element={<PageHome />} />
+          <Route path={paths.login} element={<PageLogin />} />
+        </Route>
 
-        <Route path="/" element={<Sidebar />} >
-          <Route path="dashboard" element={<PageDashboard />} />
-          <Route path="about" element={<PageAbout />} />
+        <Route path={domainPrivate} element={<Sidebar />} >
+          <Route path={paths.dashboard} element={<PageDashboard />} />
+          <Route path={paths.about} element={<PageAbout />} />
         </Route>
 
       </Routes>
