@@ -26,10 +26,13 @@ class Auth {
       }
 
       if(sessionStorage.getItem('auth-123')) {
-        const auth = JSON.parse(sessionStorage.getItem('auth-123') || '{}');
-        this.setAuth(auth);
+        const auth = JSON.parse(sessionStorage.getItem('auth-123') || 'null');
+        auth && this.setAuth(auth);
       }
-     
+    }
+
+    persistAuth(auth: IAuth) {
+      sessionStorage.setItem('auth-123', JSON.stringify(auth));
     }
   
     logout() {
@@ -40,14 +43,11 @@ class Auth {
         email: '',
         profile: []
       }
+      sessionStorage.removeItem('auth-123');
     }
   
     isAuthenticated() {
       return this.authenticated;
-    }
-
-    persistAuth(auth: IAuth) {
-      sessionStorage.setItem('auth-123', JSON.stringify(auth));
     }
 
     setAuth(auth: IAuth) {
