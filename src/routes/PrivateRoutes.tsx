@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import Auth from './Auth';
 import { paths } from './paths';
+import auth from '../entities/Auth/auth';
 
 export function PrivateRoutes() {
-  return Auth.isAuthenticated() ? <Outlet /> : <Navigate to={paths.home} />;
+  return auth.isAuthenticated() ? <Outlet /> : <Navigate to={paths.home} />;
 }

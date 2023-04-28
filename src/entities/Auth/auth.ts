@@ -1,16 +1,6 @@
-interface IUser  {
-  name: string;
-  email: string;
-  profile: string[];
-}
+import { IAuth, INewAuth, IUser } from "./interface";
 
-export interface IAuth {
-  authenticated: boolean;
-  token: string;
-  user: IUser;
-}
-
-class Auth {
+class Auth implements IAuth {
     private authenticated: boolean;
     private token: string;
     private user: IUser
@@ -43,20 +33,32 @@ class Auth {
       sessionStorage.removeItem('auth-123');
     }
 
-    verifyAuth(auth: IAuth) {
-      if(!auth.token) return this.logout();
-      if(!auth.user.name) return this.logout();
-      if(!auth.user.email) return this.logout();
-      if(!auth.user.profile) return this.logout();
+    verifyAuth(auth: INewAuth) {
+      if(!auth.token) {
+        this.logout();
+        return false;
+      }
+      if(!auth.user.name) {
+        this.logout();
+        return false;
+      }
+      if(!auth.user.email) {
+        this.logout();
+        return false;
+      }
+      if(!auth.user.profile) {
+        this.logout();
+        return false;
+      }
       return true;
     }
 
-    persistAuth(auth: IAuth) {
+    persistAuth(auth: INewAuth) {
       if(!this.verifyAuth(auth)) return;
       sessionStorage.setItem('auth-123', JSON.stringify(auth));
     }
   
-    setAuth(auth: IAuth) {
+    setAuth(auth: INewAuth) {
       if(!this.verifyAuth(auth)) return;   
       this.user = auth.user;
       this.token = auth.token;

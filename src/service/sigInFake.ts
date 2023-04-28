@@ -1,7 +1,6 @@
-import { IAuth } from "../routes/Auth";
-
+import { INewAuth } from "../entities/Auth/interface";
 interface IResponse {
-    data: IAuth;
+    data: INewAuth;
     status: number;
 }
 

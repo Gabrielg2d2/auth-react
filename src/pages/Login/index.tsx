@@ -1,9 +1,9 @@
 
 import { FormEvent, useEffect } from 'react'
 import { TemplateLogin } from './template'
-import auth from '../../routes/Auth';
 import { sigInFake } from '../../service/sigInFake';
 import { useNavigationCustom } from '../../routes/useNavigationCustom';
+import auth from '../../entities/Auth/auth';
 
 type LoginType = {
   email: string
