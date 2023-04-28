@@ -15,7 +15,6 @@ class Auth {
     private token: string;
     private user: IUser
 
-
     constructor() {
       this.authenticated = false;
       this.token = '';
@@ -25,14 +24,12 @@ class Auth {
         profile: []
       }
 
-      if(sessionStorage.getItem('auth-123')) {
-        const auth = JSON.parse(sessionStorage.getItem('auth-123') || 'null');
-        auth && this.setAuth(auth);
-      }
+      this.initializeAuth();
     }
 
-    persistAuth(auth: IAuth) {
-      sessionStorage.setItem('auth-123', JSON.stringify(auth));
+    initializeAuth() {
+      const auth = JSON.parse(sessionStorage.getItem('auth-123') || 'null');
+      if(auth) this.setAuth(auth);
     }
   
     logout() {
@@ -45,22 +42,30 @@ class Auth {
       }
       sessionStorage.removeItem('auth-123');
     }
-  
-    isAuthenticated() {
-      return this.authenticated;
-    }
 
-    setAuth(auth: IAuth) {
+    verifyAuth(auth: IAuth) {
       if(!auth.token) return this.logout();
       if(!auth.user.name) return this.logout();
       if(!auth.user.email) return this.logout();
       if(!auth.user.profile) return this.logout();
-      
+      return true;
+    }
+
+    persistAuth(auth: IAuth) {
+      if(!this.verifyAuth(auth)) return;
+      sessionStorage.setItem('auth-123', JSON.stringify(auth));
+    }
+  
+    setAuth(auth: IAuth) {
+      if(!this.verifyAuth(auth)) return;   
       this.user = auth.user;
       this.token = auth.token;
       this.authenticated = auth.authenticated;
-
       this.persistAuth(auth);
+    }
+
+    isAuthenticated() {
+      return this.authenticated;
     }
 
     getToken() {
