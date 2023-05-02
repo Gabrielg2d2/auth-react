@@ -1,4 +1,5 @@
 import Auth from "../../entities/Auth/auth"
+import { IAuth } from "../../entities/Auth/interface";
 import { PersistAuth } from "../../entities/PersistAuth";
 
 type LoginType = {
@@ -7,14 +8,14 @@ type LoginType = {
   }
 
 export class Login {
-    private auth: typeof Auth;
+    private auth: IAuth;
     private persist = new PersistAuth();
 
     constructor() {
         this.auth = Auth;      
     }
 
-    async login(props: LoginType) {
+    async signIn(props: LoginType) {
         console.log("login: ", props)
         // chamar a camada de infraestrutura
         // para fazer a requisição
@@ -29,11 +30,19 @@ export class Login {
             authenticated: true
         }
 
-        if(!this.auth.verifyAuth(response)) throw new Error("Error response login")
+        if(!this.auth.verifyAuth(response)) {
+            this.auth.logout();
+            throw new Error("Error response login")
+        }
         this.auth.setAuth(response)
         this.persist.setPersist(response)
 
         return response;
+    }
+
+    async signOut() {
+        this.auth.logout();
+        this.persist.clearPersist();
     }
     
 }

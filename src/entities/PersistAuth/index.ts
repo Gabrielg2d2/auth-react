@@ -2,17 +2,23 @@ import { INewAuth } from "../Auth/interface";
 import { AdapterSessionStorage } from "./AdapterSessionStorage";
 import { IPersistAuth } from "./interface";
 
-export class PersistAuth extends AdapterSessionStorage implements IPersistAuth{
+export class PersistAuth implements IPersistAuth{
+
+    private adapter: AdapterSessionStorage;
+
+    constructor() {
+        this.adapter = new AdapterSessionStorage();
+    }
 
     getPersist() {
-        return this.getSessionAuth();
+        return this.adapter.getSessionAuth();
     }
 
     setPersist(auth: INewAuth) {
-        this.setSessionAuth(auth);
+        this.adapter.setSessionAuth(auth);
     }
 
     clearPersist() {
-        this.clearSessionAuth();
+        this.adapter.clearSessionAuth();
     }
 }
