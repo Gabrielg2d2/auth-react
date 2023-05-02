@@ -1,23 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import { useAdapterNavigationWeb } from "./AdapterNavigationWeb";
 import { paths } from "./paths";
 
 export function useNavigationCustom() {
-    const navigation = useNavigate();
+    const {navigationAbout, navigationDashboard, navigationHome, navigationLogout} = useAdapterNavigationWeb();
 
     function handleHome() {
-      navigation(paths.home);
+      navigationHome(paths.home);
     }
 
     function handleLogout() {
-      navigation(paths.login);
+      navigationLogout(paths.login);
     }
 
     function handleDashboard() {
-      navigation(paths.dashboard);
+      navigationDashboard(paths.dashboard);
     }
 
     function handleAbout() {
-      navigation(paths.about);
+      navigationAbout(paths.about);
     }
 
     return { handleLogout, handleDashboard, handleAbout, handleHome };

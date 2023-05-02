@@ -31,13 +31,6 @@ export function PageLogin() {
   
       await login.signOut()
     })()
-
-    return () => {
-      const email = document.querySelector('.email') as HTMLInputElement
-      const password = document.querySelector('.password') as HTMLInputElement
-      email.value = ""
-      password.value = ""
-    }
    }, [])
 
   return (<TemplateLogin handleSubmit={handleSubmit}/>)
