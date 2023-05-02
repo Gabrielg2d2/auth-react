@@ -1,7 +1,7 @@
 import { TemplateHome } from './template'
 import { useEffect } from 'react';
 import { useNavigationCustom } from '../../routes/useNavigationCustom';
-import auth from '../../entities/Auth/auth';
+import { Login } from '../../domain/Login';
 
 export function PageHome() {
   const { handleLogout } = useNavigationCustom();
@@ -11,7 +11,8 @@ export function PageHome() {
   }
 
   useEffect(() => {
-    auth.logout()
+    const login = new Login()
+    login.signOut()
   },[])
 
   return (<TemplateHome handleNavigationLogin={handleNavigationLogin} />)

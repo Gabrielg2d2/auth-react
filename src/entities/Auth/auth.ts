@@ -1,6 +1,5 @@
 import { IAuth, INewAuth, IUser } from "./interface";
-
-class Auth implements IAuth {
+export class Auth implements IAuth {
     private authenticated: boolean;
     private token: string;
     private user: IUser
@@ -65,6 +64,4 @@ class Auth implements IAuth {
       return this.user;
     }
   }
-  
-  export default new Auth();
   

@@ -1,5 +1,4 @@
-import Auth from "../../entities/Auth/auth"
-import { IAuth } from "../../entities/Auth/interface";
+import { Auth } from "../../entities/Auth/auth"
 import { PersistAuth } from "../../entities/PersistAuth";
 
 type LoginType = {
@@ -8,12 +7,8 @@ type LoginType = {
   }
 
 export class Login {
-    private auth: IAuth;
+    private auth = new Auth();
     private persist = new PersistAuth();
-
-    constructor() {
-        this.auth = Auth;      
-    }
 
     async signIn(props: LoginType) {
         console.log("login: ", props)
