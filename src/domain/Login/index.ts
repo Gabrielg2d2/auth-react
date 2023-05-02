@@ -45,4 +45,8 @@ export class Login {
         this.persist.clearPersist();
     }
     
+
+    persistLogin() {
+        return this.persist.getPersist();
+    }
 }
