@@ -2,9 +2,11 @@ version: '3.8'
 
 services:
   app:
-    build: .
-    image: auth:latest
-    container_name: auth-container
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    image: auth-app-image
+    container_name: auth-app-container
     ports:
       - '3000:3000'
     environment:
@@ -12,4 +14,3 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    command: npm run dev
