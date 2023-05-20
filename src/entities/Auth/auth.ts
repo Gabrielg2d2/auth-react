@@ -22,7 +22,6 @@ export class Auth implements IAuth {
         email: '',
         profile: []
       }
-      sessionStorage.removeItem('auth-123');
     }
 
     verifyAuth(auth: INewAuth) {
